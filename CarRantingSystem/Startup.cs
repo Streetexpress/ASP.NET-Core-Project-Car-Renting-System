@@ -2,6 +2,7 @@
 namespace CarRantingSystem
 {
     using CarRantingSystem.Data;
+    using CarRantingSystem.Infrastructure;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
@@ -18,7 +19,7 @@ namespace CarRantingSystem
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddDbContext<CatRentingDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                .AddDbContext<CarRentingDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -30,12 +31,14 @@ namespace CarRantingSystem
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
-                .AddEntityFrameworkStores<CatRentingDbContext>();
+                .AddEntityFrameworkStores<CarRentingDbContext>();
 
             services.AddControllersWithViews();
         }
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.PrepareDatabase();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -59,6 +62,10 @@ namespace CarRantingSystem
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
                 });
+
+
+       
+
         }
     }
 }
