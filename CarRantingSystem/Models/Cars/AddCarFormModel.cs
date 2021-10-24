@@ -1,19 +1,21 @@
-﻿namespace CarRantingSystem.Models.Cars
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace CarRantingSystem.Models.Cars
 {
     public class AddCarFormModel
     {
  
-        public string Brand { get; set; }
+        public string Brand { get; init; }
 
-        public string Model { get; set; }
+        public string Model { get; init; }
 
-        public string Description { get; set; }
+        public string Description { get; init; }
 
-    
-        public string ImageURL { get; set; }
+        [Display(Name = "Image URL")]
+        public string ImageURL { get; init; }
 
-        public int Year { get; set; }
+        public int Year { get; init; }
 
-        public int CategoryId { get; set; }
+        public int CategoryId { get; init; }
     }
 }
